@@ -114,6 +114,7 @@ mutation CreateTicket($createTicketArgs: CreateTicketArgs!) {
     createdAt
     user_id
     ticket_id
+    duration
     category {
       id
       category_name
@@ -135,6 +136,7 @@ mutation GetAllTicketsBySingleUser($userId: Float!) {
     user_id
     createdAt
     ticket_id
+    duration
     category {
       id
       category_name
@@ -156,6 +158,7 @@ mutation FindSingleTicket($findSingleTicketId: Float!, $userId: Float!) {
     user_id
     createdAt
     ticket_id
+    duration
     category {
       id
       category_name
@@ -177,6 +180,7 @@ mutation updateStatusClosed($ticketId: Float!) {
     user_id
     createdAt
     ticket_id
+    duration
     category {
       id
       category_name
@@ -199,6 +203,7 @@ query GetAllClosedTicketsBySingleUser($userId: Float!) {
     user_id
     createdAt
     ticket_id
+    duration
     category {
       id
       category_name
@@ -220,6 +225,7 @@ query GetAllClosedTickets($adminUserId: Float!) {
     user_id
     createdAt
     ticket_id
+    duration
     category {
       id
       category_name
@@ -241,6 +247,7 @@ mutation getAllOpenedTickets($adminUserId: Float!) {
     message
     status
     user_id
+    duration
     category {
       id
       category_name
@@ -276,6 +283,7 @@ mutation CreateTicketReply($createTicketReplyArgs: CreateTicketReplyArgs!) {
       ticket_id
       title
       user_id
+      duration
     }
   }
 }
@@ -305,6 +313,7 @@ mutation GetAllRepliesBySingleTicket($ticketId: Float!) {
       ticket_id
       title
       user_id
+      duration
     }
   }
 }
@@ -320,6 +329,7 @@ mutation AdminReadSingleTicket($adminReadSingleTicketId: Float!) {
     message
     status
     user_id
+    duration
     category {
       id
       category_name
@@ -330,3 +340,24 @@ mutation AdminReadSingleTicket($adminReadSingleTicketId: Float!) {
   }
 }
 `;
+
+export const FindAllUserAmount = gql`
+mutation FindAllUserAmount {
+  findAllUserAmount {
+    id
+    order_id
+    amount
+    user {
+      id
+      emailAddress
+      password
+      firstName
+      lastName
+      userPosition
+      createdAt
+    }
+    createdAt
+  }
+}
+`;
+

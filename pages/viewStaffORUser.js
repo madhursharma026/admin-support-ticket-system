@@ -141,7 +141,8 @@ export default function ViewStaffORUser() {
                                             <td>{alUserDetails.emailAddress}</td>
                                             <td className={styles.hideColumnAfterLGScrn} style={{ fontWeight: 'bold' }}>{alUserDetails.userPosition}</td>
                                             <td className={styles.hideColumnAfterLGScrn}>
-                                                {moment(alUserDetails.createdAt, 'YYYY-MM-DD HH:mm:ss 2023-12-20 22:07:22.772366').tz('Asia/Kolkata').format('MMMM DD, YYYY [at] h:mm:ss A')}
+                                                {/* {moment(alUserDetails.createdAt, 'YYYY-MM-DD HH:mm:ss 2023-12-20 22:07:22.772366').tz('Asia/Kolkata').format('MMMM DD, YYYY [at] h:mm:ss A')} */}
+                                                {moment(new Date(Number(alUserDetails.createdAt))).format('YYYY-MM-DD HH:mm:ss')}
                                                 {/* {alUserDetails.createdAt} */}
                                             </td>
                                             <td>

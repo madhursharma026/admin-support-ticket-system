@@ -1,3 +1,4 @@
+import moment from 'moment';
 import { useRouter } from 'next/router';
 import Table from 'react-bootstrap/Table';
 import { Dropdown } from 'react-bootstrap';
@@ -102,34 +103,84 @@ const Home = () => {
               <Table striped bordered hover variant="light" className='mt-3 text-center'>
                 <thead>
                   <tr>
-                    <th className='p-3 fs-5'>Id</th>
-                    <th className='p-3 fs-5'>Title</th>
-                    <th className='p-3 fs-5'>Catg.</th>
-                    <th className='p-3 fs-5'>Status</th>
-                    <th className={`p-3 fs-5 ${styles.hideColumnAfterLGScrn}`}>Priority</th>
-                    <th className='p-3 fs-5'>Action</th>
+                                <th className='p-3 fs-5'>Id</th>
+                                <th className='p-3 fs-5'>Title</th>
+                                <th className={`p-3 fs-5 ${styles.hideColumnAfterLGScrn}`}>Catg.</th>
+                                <th className='p-3 fs-5'>Status</th>
+                                <th className={`p-3 fs-5 ${styles.hideColumnAfterLGScrn}`}>Priority</th>
+                                <th className={`p-3 fs-5 ${styles.hideColumnAfterMDScrn}`}>Duration</th>
+                                <th className='p-3 fs-5'>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {allTickets.map((allTickets, index) => (
-                    <tr>
-                      <td style={{ fontWeight: 'bold' }}>{index + 1}</td>
-                      <td>{allTickets.title}</td>
-                      <td>{allTickets.category.category_name}</td>
-                      <td>{allTickets.status === 'open' ? <b>{allTickets.status}</b> : `${allTickets.status}`}</td>
-                      <td className={`${styles.hideColumnAfterLGScrn} ${allTickets.priority === 'High' ? 'text-danger' : 'text-black'}`}><b>{allTickets.priority}</b></td>
-                      <td className={styles.hideColumnAfterLGScrn}>
-                        <button type="button" className="btn btn-primary" onClick={(e) => moveToViewTicketPage(allTickets.id)}>View</button>
-                        &nbsp;
-                        <button type="button" className="btn btn-warning mt-sm-0 mt-2" onClick={() => makeTicketClosed(allTickets.id)}>Closed</button>
-                      </td>
-                      <td className={styles.showColumnAfterLGScrn}>
-                        <button type="button" className="btn btn-primary" onClick={(e) => moveToViewTicketPage(allTickets.id)}>V</button>
-                        &nbsp;
-                        <button type="button" className="btn btn-warning mt-sm-0 mt-2" onClick={() => makeTicketClosed(allTickets.id)}>C</button>
-                      </td>
-                    </tr>
-                  ))}
+                            {allTickets.map((allTickets, index) => (
+                                <tr>
+                                    <td style={{ fontWeight: 'bold' }}>{index + 1}</td>
+                                    <td>{allTickets.title}</td>
+                                    <td className={`${styles.hideColumnAfterLGScrn}`}>{allTickets.category.category_name}</td>
+                                    <td>{allTickets.status === 'open' ? <b>{allTickets.status}</b> : `${allTickets.status}`}</td>
+                                    <td className={`${styles.hideColumnAfterLGScrn} ${allTickets.priority === 'High' ? 'text-danger' : 'text-black'}`}><b>{allTickets.priority}</b></td>
+                                    <td className={`${styles.hideColumnAfterMDScrn}`}>
+                                    {(moment.duration(moment().diff(moment(new Date(Number(allTickets.duration))).format('YYYY-MM-DD HH:mm:ss')))).years() !== 0 ?
+                                                (moment.duration(moment().diff(moment(new Date(Number(allTickets.duration))).format('YYYY-MM-DD HH:mm:ss')))).years() + ' Years'
+                                                :
+                                                <>
+                                                    {(moment.duration(moment().diff(moment(new Date(Number(allTickets.duration))).format('YYYY-MM-DD HH:mm:ss')))).months() !== 0 ?
+                                                        (moment.duration(moment().diff(moment(new Date(Number(allTickets.duration))).format('YYYY-MM-DD HH:mm:ss')))).months() + ' Months'
+                                                        :
+                                                        <>
+                                                            {(moment.duration(moment().diff(moment(new Date(Number(allTickets.duration))).format('YYYY-MM-DD HH:mm:ss')))).days() !== 0 ?
+                                                                (moment.duration(moment().diff(moment(new Date(Number(allTickets.duration))).format('YYYY-MM-DD HH:mm:ss')))).days() + ' Days'
+                                                                :
+                                                                <>
+                                                                    {(moment.duration(moment().diff(moment(new Date(Number(allTickets.duration))).format('YYYY-MM-DD HH:mm:ss')))).hours() !== 0 ?
+                                                                        (moment.duration(moment().diff(moment(new Date(Number(allTickets.duration))).format('YYYY-MM-DD HH:mm:ss')))).hours() + ' Hours'
+                                                                        :
+                                                                        <>
+                                                                            {(moment.duration(moment().diff(moment(new Date(Number(allTickets.duration))).format('YYYY-MM-DD HH:mm:ss')))).minutes() !== 0 ?
+                                                                                (moment.duration(moment().diff(moment(new Date(Number(allTickets.duration))).format('YYYY-MM-DD HH:mm:ss')))).minutes() + ' Minutes'
+                                                                                :
+                                                                                <>
+                                                                                    {(moment.duration(moment().diff(moment(new Date(Number(allTickets.duration))).format('YYYY-MM-DD HH:mm:ss')))).seconds() !== 0 ?
+                                                                                        (moment.duration(moment().diff(moment(new Date(Number(allTickets.duration))).format('YYYY-MM-DD HH:mm:ss')))).seconds() + ' Seconds'
+                                                                                        :
+                                                                                        <></>
+                                                                                    }
+                                                                                </>
+                                                                            }
+                                                                        </>
+                                                                    }
+                                                                </>
+                                                            }
+                                                        </>
+                                                    }
+                                                </>
+                                            }
+                                    </td>
+                                    <td className={styles.hideColumnAfterLGScrn}>
+                                        <button type="button" className="btn btn-primary" onClick={(e) => moveToViewTicketPage(allTickets.id)}>View</button>
+                                        {allTickets.status !== 'closed' ?
+                                            <>
+                                                &nbsp;
+                                                <button type="button" className="btn btn-warning mt-sm-0 mt-2" onClick={() => makeTicketClosed(allTickets.id)}>Closed</button>
+                                            </>
+                                            :
+                                            <></>
+                                        }
+                                    </td>
+                                    <td className={styles.showColumnAfterLGScrn}>
+                                        <button type="button" className="btn btn-primary" onClick={(e) => moveToViewTicketPage(allTickets.id)}>V</button>
+                                        {allTickets.status !== 'closed' ?
+                                            <>
+                                                &nbsp;
+                                                <button type="button" className="btn btn-warning mt-sm-0 mt-2" onClick={() => makeTicketClosed(allTickets.id)}>C</button>
+                                            </>
+                                            :
+                                            <></>
+                                        }
+                                    </td>
+                                </tr>
+                            ))}
                 </tbody>
               </Table>
             </>

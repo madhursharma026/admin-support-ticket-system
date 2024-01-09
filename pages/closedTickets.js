@@ -1,3 +1,4 @@
+import moment from 'moment';
 import { useRouter } from 'next/router';
 import Table from 'react-bootstrap/Table';
 import { Dropdown } from 'react-bootstrap';
@@ -85,7 +86,8 @@ export default function ClosedTickets() {
                                         <th className='p-3 fs-5'>Id</th>
                                         <th className='p-3 fs-5'>Title</th>
                                         <th className='p-3 fs-5'>Catg.</th>
-                                        <th className={`p-3 fs-5 ${styles.hideColumnAfterLGScrn}`}>Priority</th>
+                                        <th className={`p-3 fs-5 ${styles.hideColumnAfterLGScrn}`}>Duration</th>
+                                        <th className={`p-3 fs-5 ${styles.hideColumnAfterMDScrn}`}>Priority</th>
                                         <th className='p-3 fs-5'>Action</th>
                                     </tr>
                                 </thead>
@@ -95,6 +97,44 @@ export default function ClosedTickets() {
                                             <td style={{ fontWeight: 'bold' }}>{index + 1}</td>
                                             <td>{allTickets.title}</td>
                                             <td>{allTickets.category.category_name}</td>
+                                            {/* <td className={`${styles.hideColumnAfterLGScrn}`}><b><td className={`${styles.hideColumnAfterLGScrn}`}><b>{moment(new Date(Number(allTickets.duration))).format('YYYY-MM-DD HH:mm:ss')}</b></td></b></td> */}
+                                            <td className={styles.hideColumnAfterMDScrn}>
+                                                {(moment.duration(moment().diff(moment(new Date(Number(allTickets.duration))).format('YYYY-MM-DD HH:mm:ss')))).years() !== 0 ?
+                                                    (moment.duration(moment().diff(moment(new Date(Number(allTickets.duration))).format('YYYY-MM-DD HH:mm:ss')))).years() + ' Years'
+                                                    :
+                                                    <>
+                                                        {(moment.duration(moment().diff(moment(new Date(Number(allTickets.duration))).format('YYYY-MM-DD HH:mm:ss')))).months() !== 0 ?
+                                                            (moment.duration(moment().diff(moment(new Date(Number(allTickets.duration))).format('YYYY-MM-DD HH:mm:ss')))).months() + ' Months'
+                                                            :
+                                                            <>
+                                                                {(moment.duration(moment().diff(moment(new Date(Number(allTickets.duration))).format('YYYY-MM-DD HH:mm:ss')))).days() !== 0 ?
+                                                                    (moment.duration(moment().diff(moment(new Date(Number(allTickets.duration))).format('YYYY-MM-DD HH:mm:ss')))).days() + ' Days'
+                                                                    :
+                                                                    <>
+                                                                        {(moment.duration(moment().diff(moment(new Date(Number(allTickets.duration))).format('YYYY-MM-DD HH:mm:ss')))).hours() !== 0 ?
+                                                                            (moment.duration(moment().diff(moment(new Date(Number(allTickets.duration))).format('YYYY-MM-DD HH:mm:ss')))).hours() + ' Hours'
+                                                                            :
+                                                                            <>
+                                                                                {(moment.duration(moment().diff(moment(new Date(Number(allTickets.duration))).format('YYYY-MM-DD HH:mm:ss')))).minutes() !== 0 ?
+                                                                                    (moment.duration(moment().diff(moment(new Date(Number(allTickets.duration))).format('YYYY-MM-DD HH:mm:ss')))).minutes() + ' Minutes'
+                                                                                    :
+                                                                                    <>
+                                                                                        {(moment.duration(moment().diff(moment(new Date(Number(allTickets.duration))).format('YYYY-MM-DD HH:mm:ss')))).seconds() !== 0 ?
+                                                                                            (moment.duration(moment().diff(moment(new Date(Number(allTickets.duration))).format('YYYY-MM-DD HH:mm:ss')))).seconds() + ' Seconds'
+                                                                                            :
+                                                                                            <></>
+                                                                                        }
+                                                                                    </>
+                                                                                }
+                                                                            </>
+                                                                        }
+                                                                    </>
+                                                                }
+                                                            </>
+                                                        }
+                                                    </>
+                                                }
+                                            </td>
                                             <td className={`${styles.hideColumnAfterLGScrn} ${allTickets.priority === 'High' ? 'text-danger' : 'text-black'}`}><b>{allTickets.priority}</b></td>
                                             <td className={styles.hideColumnAfterLGScrn}>
                                                 <button type="button" className="btn btn-primary" onClick={(e) => moveToViewTicketPage(allTickets.id)}>View</button>
@@ -113,7 +153,7 @@ export default function ClosedTickets() {
                         </h1>
                     }
                 </div>
-            </div>
+            </div >
         </div >
     )
 }
