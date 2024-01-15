@@ -361,3 +361,35 @@ mutation FindAllUserAmount {
 }
 `;
 
+export const CreateTags = gql`
+mutation CreateTags($createTagsArgs: CreateTagsArgs!, $adminUserId: Float!) {
+  createTags(createTagsArgs: $createTagsArgs, adminUserId: $adminUserId) {
+    id
+    tag_name
+    createdAt
+    tag_description
+  }
+}
+`;
+
+export const GetAllTags = gql`
+mutation GetAllTags {
+  getAllTags {
+    id
+    tag_name
+    tag_description
+    createdAt
+  }
+}
+`;
+
+export const FindSingleTag = gql`
+mutation FindSingleTag($tagName: String!) {
+  findSingleTag(tagName: $tagName) {
+    id
+    tag_name
+    tag_description
+    createdAt
+  }
+}
+`;

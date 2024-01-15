@@ -37,10 +37,11 @@ function HeaderNav(props) {
                     {(userLogin) ?
                         <>
                             <Link href='/' className={`${props.pageName === 'viewTicket' ? styles.activeLink : styles.unActiveLink} text-white mx-2`}>View Tickets</Link>
-                            <Link href='viewStaffORUser' className={`${props.pageName === 'viewStaffORUser' ? styles.activeLink : styles.unActiveLink} text-white mx-2`}>View/Edit/Suspend (User/Staff)</Link>
+                            <Link href='viewStaffORUser' className={`${props.pageName === 'viewStaffORUser' ? styles.activeLink : styles.unActiveLink} text-white mx-2`}>User Details</Link>
                             {/* <Link href='' className={`${props.pageName === '' ? styles.activeLink : styles.unActiveLink} text-white mx-2`}>Manage Staff Permissions</Link> */}
                             <Link href='manageSupportCategories' className={`${props.pageName === 'manageSupportCategories' ? styles.activeLink : styles.unActiveLink} text-white mx-2`}>Manage Categories</Link>
-                            <Link href='userTransactionReport' className={`${props.pageName === 'userTransactionReport' ? styles.activeLink : styles.unActiveLink} text-white mx-2`}>User Transaction Report</Link>
+                            <Link href='manageTags' className={`${props.pageName === 'manageTags' ? styles.activeLink : styles.unActiveLink} text-white mx-2`}>Manage Tags</Link>
+                            <Link href='userTransactionReport' className={`${props.pageName === 'userTransactionReport' ? styles.activeLink : styles.unActiveLink} text-white mx-2`}>Transaction Report</Link>
                             <span onClick={() => logoutUser()} style={{ cursor: 'pointer' }} className={`${props.pageName === 'Logout' ? styles.activeLink : styles.unActiveLink} text-white mx-2`}>Logout</span>
                         </>
                         :
@@ -51,10 +52,11 @@ function HeaderNav(props) {
                     {(userLogin) ?
                         <>
                             <Link href='/' className={`${props.pageName === 'viewTicket' ? styles.activeLink : styles.unActiveLink} text-white mx-2 py-2 mt-3`} style={{ display: 'block' }}>View Tickets</Link>
-                            <Link href='viewStaffORUser' className={`${props.pageName === 'viewStaffORUser' ? styles.activeLink : styles.unActiveLink} text-white mx-2 py-2`} style={{ display: 'block' }}>View/Edit/Suspend (User/Staff)</Link>
+                            <Link href='viewStaffORUser' className={`${props.pageName === 'viewStaffORUser' ? styles.activeLink : styles.unActiveLink} text-white mx-2 py-2`} style={{ display: 'block' }}>User Details</Link>
                             {/* <Link href='' className={`${props.pageName === '' ? styles.activeLink : styles.unActiveLink} text-white mx-2 py-2`} style={{ display: 'block' }}>Manage Staff Permissions</Link> */}
                             <Link href='manageSupportCategories' className={`${props.pageName === 'manageSupportCategories' ? styles.activeLink : styles.unActiveLink} text-white mx-2 py-2`} style={{ display: 'block' }}>Manage Categories</Link>
-                            <Link href='userTransactionReport' className={`${props.pageName === 'userTransactionReport' ? styles.activeLink : styles.unActiveLink} text-white mx-2 py-2`} style={{ display: 'block' }}>User Transaction Report</Link>
+                            <Link href='manageTags' className={`${props.pageName === 'manageTags' ? styles.activeLink : styles.unActiveLink} text-white mx-2 py-2`} style={{ display: 'block' }}>Manage Tags</Link>
+                            <Link href='userTransactionReport' className={`${props.pageName === 'userTransactionReport' ? styles.activeLink : styles.unActiveLink} text-white mx-2 py-2`} style={{ display: 'block' }}>Transaction Report</Link>
                             <span onClick={() => logoutUser()} style={{ cursor: 'pointer' }} className={`${props.pageName === 'Logout' ? styles.activeLink : styles.unActiveLink} text-white mx-2`}>Logout</span>
                         </>
                         :

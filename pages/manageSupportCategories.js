@@ -141,7 +141,7 @@ function ManageSupportCategories() {
 
                         <Modal show={show} onHide={handleClose} centered>
                             <Modal.Header closeButton>
-                                <Modal.Title>Add Question</Modal.Title>
+                                <Modal.Title>Add Category</Modal.Title>
                             </Modal.Header>
                             <Modal.Body>
                                 <Form.Label>Category Title</Form.Label>
